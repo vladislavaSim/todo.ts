@@ -25,6 +25,10 @@ const App: FC = () => {
         setTask('')
         setDeadline(0)
     }
+
+    const finishTask = (taskNameToFinish: string) : any => {
+        setList(list.filter(task => task.taskName !== taskNameToFinish))
+    }
   return (
     <div className="App">
       <div className='header'>
@@ -49,7 +53,7 @@ const App: FC = () => {
           </div>
           {
               list && list.map((task: ITask, key: number) => {
-                  return <Task key={key} task={task}/>
+                  return <Task key={key} task={task} finishFunc={finishTask}/>
               })
           }
       </div>

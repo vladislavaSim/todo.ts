@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {ITask} from "../Interfaces";
 
 interface Props {
-    task: ITask;
+    task: ITask,
+    finishFunc(taskNameToFinish: string): void
 }
 
-const Task = ({task}: Props) => {
+const Task = ({task, finishFunc}: Props) => {
     return (
         <div className='task'>
             <div>
-                {task.taskName}
+                <div>
+                    {task.taskName}
+                </div>
+                <div>
+                    {task.deadline > 1 ? task.deadline + ' days' : task.deadline + ' day'}
+                </div>
             </div>
-            <div>
-                {task.deadline > 1 ? task.deadline + ' days' : task.deadline + ' day'}
-            </div>
+            <button onClick={() => finishFunc(task.taskName)}>x</button>
         </div>
     );
 };
